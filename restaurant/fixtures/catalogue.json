@@ -1,0 +1,386 @@
+[
+{
+  "model": "restaurant.category",
+  "pk": 1,
+  "fields": {
+    "name": "Tacos et Wraps",
+    "is_active": true,
+    "display_order": 1
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 2,
+  "fields": {
+    "name": "Burgers",
+    "is_active": true,
+    "display_order": 2
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 3,
+  "fields": {
+    "name": "Crousty",
+    "is_active": true,
+    "display_order": 3
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 4,
+  "fields": {
+    "name": "Formules",
+    "is_active": true,
+    "display_order": 4
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 5,
+  "fields": {
+    "name": "Desserts",
+    "is_active": true,
+    "display_order": 5
+  }
+},
+{
+  "model": "restaurant.category",
+  "pk": 6,
+  "fields": {
+    "name": "Boissons",
+    "is_active": true,
+    "display_order": 6
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "name": "Barbecue",
+    "description": "Wrap garni de viande, poulet croustillant, cheddar et sauce barbecue.",
+    "price": "7.00",
+    "image": "products/barbecue.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:04:44.439Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "name": "Frenchy",
+    "description": "Wrap généreux garni de viande, cheddar fondant et sauce fromagère.",
+    "price": "7.00",
+    "image": "products/frenchy.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:09:23.716Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 3,
+  "fields": {
+    "category": 1,
+    "name": "CBO",
+    "description": "Tacos garni de poulet croustillant, bacon de dinde, oignons et sauce crémeuse.",
+    "price": "9.00",
+    "image": "products/cbo.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:11:21.558Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 4,
+  "fields": {
+    "category": 1,
+    "name": "Radical",
+    "description": "Tacos généreux associant viande, poulet croustillant, fromage et sauce maison.",
+    "price": "9.00",
+    "image": "products/radical.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:12:45.863Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 5,
+  "fields": {
+    "category": 1,
+    "name": "RICS",
+    "description": "Tacos garni de viande, poulet croustillant, fromage et sauce maison.",
+    "price": "9.00",
+    "image": "products/rics.jpg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:13:35.259Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 6,
+  "fields": {
+    "category": 3,
+    "name": "Crousty",
+    "description": "Riz accompagné de poulet croustillant, disponible en version piquante, sucrée ou mixte.",
+    "price": "10.00",
+    "image": "products/crousty.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:15:10.747Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 7,
+  "fields": {
+    "category": 2,
+    "name": "Blindé",
+    "description": "Burger généreux composé de plusieurs steaks, poulet croustillant, cheddar, salade et sauce maison.",
+    "price": "9.00",
+    "image": "products/blindé.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:16:20.865Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 8,
+  "fields": {
+    "category": 2,
+    "name": "CHEESE BURGER",
+    "description": "Pain burger, steak haché, cheddar, cornichons, oignons et sauce burger.",
+    "price": "3.00",
+    "image": "products/cheese.jpeg",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:17:23.261Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 9,
+  "fields": {
+    "category": 4,
+    "name": "Formule L",
+    "description": "Formule L : 1 wrap + 1 boisson + 1 dessert",
+    "price": "10.00",
+    "image": "products/formuleL.jpeg",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:19:37.542Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 10,
+  "fields": {
+    "category": 4,
+    "name": "FormuleXL",
+    "description": "1 tacos + Le Biggy + 1 boisson + 1 dessert",
+    "price": "18.00",
+    "image": "",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:20:42.864Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 11,
+  "fields": {
+    "category": 4,
+    "name": "FormuleXXL",
+    "description": "2 tacos + 1 boisson + 1 dessert",
+    "price": "21.00",
+    "image": "products/formule-xxl.jpeg",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:21:32.067Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 12,
+  "fields": {
+    "category": 5,
+    "name": "Tarte aux daims",
+    "description": "TARTE",
+    "price": "3.00",
+    "image": "products/tartedaim.jpeg",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:22:33.375Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 13,
+  "fields": {
+    "category": 5,
+    "name": "Tiramisu",
+    "description": "tiramisu",
+    "price": "3.00",
+    "image": "products/tiramisu.jpeg",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:23:07.224Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 14,
+  "fields": {
+    "category": 5,
+    "name": "Tiramisu XXL",
+    "description": "Oreo, Speculos, M&ms, Daim, Schokobon",
+    "price": "7.50",
+    "image": "products/tiramisuXXL.jpeg",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 0,
+    "created_at": "2026-09-17T12:24:37.943Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 15,
+  "fields": {
+    "category": 6,
+    "name": "coca",
+    "description": "",
+    "price": "1.50",
+    "image": "products/coca.png",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 4,
+    "created_at": "2026-09-17T12:34:00.473Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 16,
+  "fields": {
+    "category": 6,
+    "name": "Fanta",
+    "description": "",
+    "price": "1.50",
+    "image": "products/fanta.png",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 2,
+    "created_at": "2026-09-17T12:34:28.656Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 17,
+  "fields": {
+    "category": 6,
+    "name": "Boisson exotique",
+    "description": "",
+    "price": "1.50",
+    "image": "products/boissonexotique.png",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 1,
+    "created_at": "2026-09-17T12:35:08.174Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 18,
+  "fields": {
+    "category": 6,
+    "name": "Mojito menthe",
+    "description": "",
+    "price": "1.50",
+    "image": "products/mojito.png",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 3,
+    "created_at": "2026-09-17T12:35:45.002Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 19,
+  "fields": {
+    "category": 6,
+    "name": "eau",
+    "description": "",
+    "price": "1.00",
+    "image": "products/eau.png",
+    "stock": 20,
+    "is_available": true,
+    "display_order": 5,
+    "created_at": "2026-09-17T12:36:12.179Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 22,
+  "fields": {
+    "category": 6,
+    "name": "Mojito Fraise",
+    "description": "",
+    "price": "3.50",
+    "image": "products/mojito_fraise_MuTmaji.png",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 6,
+    "created_at": "2026-10-19T12:32:31.189Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 23,
+  "fields": {
+    "category": 6,
+    "name": "Mojito Mangue Passion",
+    "description": "",
+    "price": "3.50",
+    "image": "products/mangue_passion_VDVVjaM.png",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 7,
+    "created_at": "2026-10-19T12:34:08.824Z"
+  }
+},
+{
+  "model": "restaurant.product",
+  "pk": 24,
+  "fields": {
+    "category": 6,
+    "name": "Limonade Bleue",
+    "description": "",
+    "price": "3.50",
+    "image": "products/limonade_bleue_NPZHREr.png",
+    "stock": 15,
+    "is_available": true,
+    "display_order": 8,
+    "created_at": "2026-10-19T12:34:56.689Z"
+  }
+}
+]

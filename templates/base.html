@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="description"
+        content="Tacos Express, livraison de nuit de tacos, burgers et desserts."
+    >
+
+    <title>
+        {% block title %}Tacos Express{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=7">
+
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}?v=7">
+</head>
+
+<body>
+    <!-- En-tête principal -->
+    <header class="site-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a
+                href="{% url 'restaurant:home' %}"
+                class="header-logo"
+                aria-label="Accueil Tacos Express"
+            >
+                <img
+                    src="{% static 'images/logo.png' %}"
+                    alt="Tacos Express"
+                >
+            </a>
+
+            <!-- Navigation principale -->
+            <nav
+                class="navigation"
+                aria-label="Navigation principale"
+            >
+                <a href="{% url 'restaurant:home' %}">
+                    Accueil
+                </a>
+
+                <a href="{% url 'restaurant:menu' %}">
+                    Notre menu
+                </a>
+
+                <a
+                    href="{% url 'orders:cart' %}"
+                    class="cart-navigation"
+                >
+                    Panier
+
+                    <span class="cart-count">
+                        {{ cart_count|default:0 }}
+                    </span>
+                </a>
+
+                <!-- Menu de l'espace client -->
+                <details class="customer-menu">
+                    <summary>
+                        {% if user.is_authenticated %}
+                            Bonjour
+                            {{ user.first_name|default:user.username }}
+                        {% else %}
+                            Espace client
+                        {% endif %}
+                    </summary>
+
+                    <div class="customer-dropdown">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'accounts:profile' %}">
+                                Mon profil
+                            </a>
+
+                            <a href="{% url 'orders:order_history' %}">
+                                Mes commandes
+                            </a>
+
+                            <form
+                                action="{% url 'accounts:logout' %}"
+                                method="post"
+                            >
+                                {% csrf_token %}
+
+                                <button type="submit">
+                                    Se déconnecter
+                                </button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'accounts:login' %}">
+                                Se connecter
+                            </a>
+
+                            <a href="{% url 'accounts:register' %}">
+                                S'inscrire
+                            </a>
+                        {% endif %}
+                    </div>
+                </details>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Messages de confirmation ou d'erreur -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Contenu propre à chaque page -->
+    <main class="site-main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a
+                    href="{% url 'restaurant:home' %}"
+                    class="footer-logo"
+                >
+                    <img
+                        src="{% static 'images/logo.png' %}"
+                        alt="Tacos Express"
+                    >
+                </a>
+
+                <p>
+                    Tacos, burgers et desserts livrés
+                    directement chez vous pendant la nuit.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h2>Navigation</h2>
+
+                <a href="{% url 'restaurant:home' %}">
+                    Accueil
+                </a>
+
+                <a href="{% url 'restaurant:menu' %}">
+                    Notre menu
+                </a>
+
+                <a href="{% url 'orders:cart' %}">
+                    Mon panier
+                </a>
+            </div>
+
+            <div class="footer-section">
+                <h2>Mon compte</h2>
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:profile' %}">
+                        Mon profil
+                    </a>
+
+                    <a href="{% url 'orders:order_history' %}">
+                        Mes commandes
+                    </a>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}">
+                        Connexion
+                    </a>
+
+                    <a href="{% url 'accounts:register' %}">
+                        Inscription
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="footer-section">
+                <h2>Livraison</h2>
+
+                <p>7 jours sur 7</p>
+                <p>De 22 h à 5 h</p>
+                <p>Dans le 91 et le 94</p>
+
+                <a href="tel:+33601141338">
+                    06 01 14 13 38
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                © {% now "Y" %} Tacos Express.
+                Tous droits réservés.
+            </p>
+
+            <p>Commande minimum : 10 €</p>
+        </div>
+    </footer>
+</body>
+</html>

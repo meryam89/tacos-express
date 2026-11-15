@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Connexion | Tacos Express
+{% endblock %}
+
+{% block content %}
+    <section class="account-page">
+        <div class="account-card">
+            <p class="subtitle">Espace client</p>
+
+            <h1>Connexion</h1>
+
+            <form method="post" class="account-form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.errors %}
+                            <div class="field-errors">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit">
+                    Se connecter
+                </button>
+            </form>
+
+            <p class="account-link">
+                Vous n'avez pas de compte ?
+
+                <a href="{% url 'accounts:register' %}">
+                    Créer un compte
+                </a>
+            </p>
+        </div>
+    </section>
+{% endblock %}

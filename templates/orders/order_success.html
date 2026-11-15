@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Commande confirmée | Tacos Express
+{% endblock %}
+
+{% block content %}
+    <section class="success-page">
+        <div class="success-card">
+            <p class="subtitle">
+                Merci {{ order.customer_name }}
+            </p>
+
+            <h1>Commande confirmée</h1>
+
+            <p>
+                Votre numéro de commande est :
+            </p>
+
+            <strong class="order-number">
+                #{{ order.id }}
+            </strong>
+
+            <p>
+                Total :
+                {{ order.total|floatformat:2 }} €
+            </p>
+
+            <p>
+                Livraison à :
+                {{ order.address }},
+                {{ order.postal_code }}
+                {{ order.city }}
+            </p>
+
+            <a
+                href="{% url 'restaurant:home' %}"
+                class="primary-button"
+            >
+                Retour à l'accueil
+            </a>
+        </div>
+    </section>
+{% endblock %}

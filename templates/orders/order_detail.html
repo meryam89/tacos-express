@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Commande #{{ order.id }} | Tacos Express
+{% endblock %}
+
+{% block content %}
+    <section class="order-detail-page">
+        <div class="order-detail-header">
+            <div>
+                <p class="subtitle">
+                    Suivi de livraison
+                </p>
+
+                <h1>Commande #{{ order.id }}</h1>
+
+                <p>
+                    Commandée le
+                    {{ order.created_at|date:"d/m/Y à H:i" }}
+                </p>
+            </div>
+
+            <span class="order-status">
+                {{ order.get_status_display }}
+            </span>
+        </div>
+
+        {% if order.status == "cancelled" %}
+            <div class="cancelled-message">
+                Cette commande a été annulée.
+            </div>
+        {% else %}
+            <div class="tracking">
+                {% for step in steps %}
+                    <div
+                        class="
+                            tracking-step
+                            {% if step.completed %}completed{% endif %}
+                            {% if step.current %}current{% endif %}
+                        "
+                    >
+                        <span class="tracking-circle">
+                            {% if step.completed %}
+                                ✓
+                            {% else %}
+                                {{ forloop.counter }}
+                            {% endif %}
+                        </span>
+
+                        <span class="tracking-label">
+                            {{ step.label }}
+                        </span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="order-detail-grid">
+            <div class="order-products">
+                <h2>Produits commandés</h2>
+
+                {% for item in order.items.all %}
+                    <div class="detail-product">
+                        <div>
+                            <strong>
+                                {{ item.product_name }}
+                            </strong>
+
+                            <p>
+                                {{ item.quantity }} ×
+                                {{ item.unit_price|floatformat:2 }} €
+                            </p>
+                        </div>
+
+                        <strong>
+                            {{ item.subtotal|floatformat:2 }} €
+                        </strong>
+                    </div>
+                {% endfor %}
+
+                <div class="summary-line">
+                    <span>Sous-total</span>
+
+                    <strong>
+                        {{ order.subtotal|floatformat:2 }} €
+                    </strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Livraison</span>
+
+                    <strong>
+                        {{ order.delivery_fee|floatformat:2 }} €
+                    </strong>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+
+                    <strong>
+                        {{ order.total|floatformat:2 }} €
+                    </strong>
+                </div>
+            </div>
+
+            <aside class="delivery-address">
+                <h2>Adresse de livraison</h2>
+
+                <p>
+                    <strong>{{ order.customer_name }}</strong>
+                </p>
+
+                <p>{{ order.address }}</p>
+
+                <p>
+                    {{ order.postal_code }}
+                    {{ order.city }}
+                </p>
+
+                <p>{{ order.phone }}</p>
+                <p>{{ order.email }}</p>
+
+                {% if order.delivery_instructions %}
+                    <h3>Instructions</h3>
+
+                    <p>
+                        {{ order.delivery_instructions }}
+                    </p>
+                {% endif %}
+            </aside>
+        </div>
+
+        <a
+            href="{% url 'orders:order_history' %}"
+            class="back-menu-button"
+        >
+            ← Retour à mes commandes
+        </a>
+    </section>
+{% endblock %}

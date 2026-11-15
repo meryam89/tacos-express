@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Notre menu | Tacos Express
+{% endblock %}
+
+{% block content %}
+    <section class="menu-page">
+        <p class="subtitle">
+            Notre sélection
+        </p>
+
+        <h1>Notre menu</h1>
+
+        {% for category in categories %}
+            <section class="category-section">
+                <h2>{{ category.name }}</h2>
+
+                <div class="product-grid">
+                    {% for product in category.products.all %}
+                        <article class="product-card">
+                            {% if product.image %}
+                                <img
+                                    src="{{ product.image.url }}"
+                                    alt="{{ product.name }}"
+                                    class="product-image"
+                                >
+                            {% endif %}
+
+                            <div class="product-content">
+                                <h3>{{ product.name }}</h3>
+
+                                <p>
+                                    {{ product.description }}
+                                </p>
+
+                                <div class="product-footer">
+                                    <strong>
+                                        {{ product.price|floatformat:2 }} €
+                                    </strong>
+
+                                    <span>
+                                        Stock : {{ product.stock }}
+                                    </span>
+                                </div>
+                                <form action="{% url 'orders:add_to_cart' product.id %}" method="post">
+                                {% csrf_token %}
+
+                                <button type="submit" class="add-cart-button">
+                                    Ajouter au panier
+                                </button>
+                            </form>
+                            </div>
+                        </article>
+                    {% empty %}
+                        <p>
+                            Aucun produit disponible dans cette catégorie.
+                        </p>
+                    {% endfor %}
+                </div>
+            </section>
+        {% empty %}
+            <p>Aucune catégorie disponible.</p>
+        {% endfor %}
+    </section>
+{% endblock %}

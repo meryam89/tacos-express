@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Mon panier | Tacos Express
+{% endblock %}
+
+{% block content %}
+    <section class="cart-page">
+        <p class="subtitle">
+            Votre commande
+        </p>
+
+        <h1>Mon panier</h1>
+
+        {% if items %}
+            <div class="cart-items">
+                {% for item in items %}
+                    <article class="cart-item">
+                        {% if item.product.image %}
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                                class="cart-item-image"
+                            >
+                        {% endif %}
+
+                        <div class="cart-item-information">
+                            <h2>
+                                {{ item.product.name }}
+                            </h2>
+
+                            <p>
+                                Prix unitaire :
+                                {{ item.product.price|floatformat:2 }} €
+                            </p>
+
+                                <div class="quantity-controls">
+                            <form
+                                action="{% url 'orders:update_cart' item.product.id %}"
+                                method="post"
+                            >
+                                {% csrf_token %}
+
+                                <input
+                                    type="hidden"
+                                    name="action"
+                                    value="decrease"
+                                >
+
+                                <button
+                                    type="submit"
+                                    aria-label="Diminuer la quantité"
+                                >
+                                    −
+                                </button>
+                            </form>
+
+                            <strong>{{ item.quantity }}</strong>
+
+                            <form action="{% url 'orders:update_cart' item.product.id %}"
+                                method="post">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="action" value="increase">
+
+                                <button type="submit" aria-label="Augmenter la quantité">
+                                    +
+                                </button>
+                            </form>
+                        </div>
+                        </div>
+
+                        <strong class="cart-item-price">
+                            {{ item.subtotal|floatformat:2 }} €
+                        </strong>
+                        <form action="{% url 'orders:remove_from_cart' item.product.id %}"
+                            method="post" class="remove-form">
+                            {% csrf_token %}
+                            <button type="submit">
+                                Supprimer
+                            </button>
+                        </form>
+                    </article>
+                {% endfor %}
+            </div>
+
+            <div class="cart-total">
+                <span>Total de la commande</span>
+
+                <strong>
+                    {{ total|floatformat:2 }} €
+                </strong>
+            </div>
+          <div class="cart-actions">
+                <a href="{% url 'restaurant:menu' %}" class="back-menu-button">
+                    ← Retour au menu
+                </a>
+
+                <a href="{% url 'orders:checkout' %}" class="checkout-button">
+                    Passer la commande
+                </a>
+            </div>
+        {% else %}
+            <div class="empty-cart">
+                <h2>Votre panier est vide</h2>
+
+                <p>
+                    Découvrez les produits Tacos Express.
+                </p>
+
+                <a
+                    href="{% url 'restaurant:menu' %}"
+                    class="primary-button"
+                >
+                    Voir le menu
+                </a>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

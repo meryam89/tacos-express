@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Inscription | Tacos Express
+{% endblock %}
+
+{% block content %}
+    <section class="account-page">
+        <div class="account-card">
+            <p class="subtitle">Nouveau client</p>
+
+            <h1>Créer un compte</h1>
+
+            <form method="post" class="account-form">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <small>
+                                {{ field.help_text }}
+                            </small>
+                        {% endif %}
+
+                        {% if field.errors %}
+                            <div class="field-errors">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit">
+                    Créer mon compte
+                </button>
+            </form>
+
+            <p class="account-link">
+                Vous avez déjà un compte ?
+
+                <a href="{% url 'accounts:login' %}">
+                    Se connecter
+                </a>
+            </p>
+        </div>
+    </section>
+{% endblock %}
