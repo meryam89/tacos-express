@@ -1,4 +1,5 @@
 from decimal import Decimal
+MINIMUM_ORDER_AMOUNT = Decimal("10.00")
 
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
@@ -181,6 +182,25 @@ def checkout(request):
     # POST si le client valide le formulaire,
     # sinon formulaire vide.
     form = CheckoutForm(request.POST or None)
+
+    # Minimum de commande : 10 € hors frais de livraison
+    if subtotal < MINIMUM_ORDER_AMOUNT:
+        return render(
+            request,
+            "orders/checkout.html",
+            {
+                "form": form,
+                "items": items,
+                "subtotal": subtotal,
+                "delivery_fee": delivery_fee,
+                "total": total,
+                "minimum_order_error": (
+                    "Le montant minimum de commande est de 10 € "
+                    "hors frais de livraison."
+                ),
+            },
+        )
+
 
     if request.method == "POST" and form.is_valid():
         order = None

@@ -11,7 +11,13 @@
 
             <h1>Finaliser ma commande</h1>
 
-            <form method="post" class="checkout-form">
+                {% if minimum_order_error %}
+                <div class="form-errors">
+                    <p>{{ minimum_order_error }}</p>
+                 </div>
+                {% endif %}
+
+<form method="post" class="checkout-form">
                 {% csrf_token %}
 
                 {% if form.non_field_errors %}
